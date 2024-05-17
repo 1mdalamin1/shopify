@@ -14,7 +14,7 @@ shopify theme dev --store vir-za.myshopify.com
 # npx tailwindcss -i ./src/tailwind.css -o ./assets/application.css --watch
 
 
-7. Section 7: JSON Templates 22 0:10/1:03 
+7. Section 7: JSON Templates 24 0:10/3:03 
 
 Tanvir+Afroza.9531805
 

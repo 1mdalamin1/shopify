@@ -1,6 +1,6 @@
 # :wave: Say hi to Tanvir :wave:
 
-[![Generic badge](https://tanvir.vir-za.com/wp-content/uploads/2023/05/virzaOk.gif)]
+![Generic badge](https://tanvir.vir-za.com/wp-content/uploads/2023/05/virzaOk.gif)
 (https://vir-za.com/)
 
 This project is created and intended to be used for the [Shopify Theme Development – Online Store 2.0 + TailwindCSS]
@@ -37,6 +37,10 @@ shopify theme init [ NAME OF YOUR THEME ] --clone-url https://github.com/polidar
 shopify theme init [ NAME OF YOUR THEME ] --clone-url https://github.com/1mdalamin1/shopify
 ```
 
+## local run this commend in root folder
+```sh
+shopify theme dev --store vir-za.myshopify.com
+```
 If you don't have Shopify CLI installed to your computer, navigate to the [installation page of Shopify CLI](https://shopify.dev/themes/tools/cli/installation).
 
 ## Not a student
