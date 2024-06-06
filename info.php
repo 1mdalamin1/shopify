@@ -14,9 +14,11 @@ shopify theme dev --store vir-za.myshopify.com
 # npx tailwindcss -i ./src/tailwind.css -o ./assets/application.css --watch
 
 
-7. Section 7: JSON Templates 24 0:10/3:03 
+7. Section 7: JSON Templates 30 0:10/37:31 
 
-Tanvir+Afroza.9531805
+
+# https://www.shopify.com/partners/blog/liquid-date-format |=> To know more about Date Formatting
+
 
 
 */
