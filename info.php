@@ -11,7 +11,7 @@ shopify theme dev --store vir-za.myshopify.com
 # npm init -y | create package.json
 
 
-2. Section 2. Installing Development Tools  0:10/6:31 
+2. Section 6. Create the OAuth/App Installer  6:00/14:31 
 
 
 #  |=> To know more about Date Formatting
@@ -19,8 +19,13 @@ shopify theme dev --store vir-za.myshopify.com
 
 Tanvir+564.505
 
-0.9531805
+Client credentials
 
+Client ID= b5f73c5a15d5e0a6795a19d47d3d100e
+Client secret= 5f0db2d7fd5bc9ab5d689f62e9340bad
+
+
+ngrok http 80
 
 */
 
