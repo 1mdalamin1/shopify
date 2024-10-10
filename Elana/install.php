@@ -1,6 +1,6 @@
 <?php
 $_API_KEY = 'b5f73c5a15d5e0a6795a19d47d3d100e';
-$_NGROK_URL = 'https://33a9-202-4-123-192.ngrok-free.app';
+$_NGROK_URL = 'https://f5d9-202-4-123-192.ngrok-free.app';
 
 $shop = $_GET['shop'];
 

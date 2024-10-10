@@ -19,7 +19,7 @@ shopify theme dev --store vir-za.myshopify.com
 
 
 
-2. Section 7. Getting Access Tokens |  11:55/13:20 
+2. Section 8. Getting Access Tokens |  6:55/09:51 
 
 
 #  |=> To know more about Date Formatting

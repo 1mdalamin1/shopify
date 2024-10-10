@@ -22,8 +22,12 @@ if(hash_equals($hmac, $new_hmac)){
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, count($var));
     curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($var));
-
+    $response = curl_exec($ch);
     curl_close($ch);
+
+    $response = json_decode($response, true);
+
+    echo print_r($response);
 }else{
     echo 'This is not coming from shopify and probably someone is hacking';
 }
