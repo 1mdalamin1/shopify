@@ -1,7 +1,5 @@
 <?php
 /*
-# https://www.udemy.com/course/shopify-theme-development-tailwindcss/learn/lecture/29740698#announcements
-# wooexperto@gmail.com | Tanvir12@#
 
 shopify theme init Dawn-clone | download Dawn theme
 shopify theme init virza --clone-url https://github.com/bbbpppolly/Elizabeth_Clean | download my github repojectory theme
@@ -18,6 +16,10 @@ shopify theme dev --store vir-za.myshopify.com
 
 
 # https://www.shopify.com/partners/blog/liquid-date-format |=> To know more about Date Formatting
+
+# 00:05s/16:26s শপিফাই - পর্ব ১ |=> https://www.youtube.com/watch?v=gBL2wB6vMXE&list=PLhPBqF--77InbheYB_rlgXSo-7DyECZTl
+
+
 
 
 
