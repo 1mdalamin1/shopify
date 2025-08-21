@@ -1,0 +1,17 @@
+[
+  {
+    "name": "rrf-blank-theme",
+    "settings": [
+      {
+        "type": "header",
+        "content": "RRF Blank Theme Settings"
+      },
+      {
+        "type": "text",
+        "id": "theme_name",
+        "label": "Theme Name",
+        "default": "RRF Blank Theme"
+      }
+    ]
+  }
+]

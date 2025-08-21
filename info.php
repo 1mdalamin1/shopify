@@ -17,9 +17,18 @@ shopify theme dev --store vir-za.myshopify.com
 
 # https://www.shopify.com/partners/blog/liquid-date-format |=> To know more about Date Formatting
 
-# 00:05s/16:26s শপিফাই - পর্ব ১ |=> https://www.youtube.com/watch?v=gBL2wB6vMXE&list=PLhPBqF--77InbheYB_rlgXSo-7DyECZTl
+# 00:05s/43:20s শপিফাই - পর্ব ৬ |=> https://www.youtube.com/watch?v=091k1y33LbA&list=PLhPBqF--77InbheYB_rlgXSo-7DyECZTl&index=6
 
+* Shopify Theme Development start with RRF
+# https://shopify.dev/docs/api/shopify-cli
+> npm install -g @shopify/cli@latest
+> shopify help
+> shopify theme init
+> shopify theme dev --store rrfv.myshopify.com
 
+# my 1st theme
+> mkdir rrf-blank-theme | cd rrf-blank-theme
+> shopify theme dev --store rrfv.myshopify.com
 
 
 

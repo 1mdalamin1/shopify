@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    {% # Inlined CSS Variables %}
+    {% render 'css-variables' %}
+
+    {{ 'tailwind.css' | asset_url | stylesheet_tag: preload: true }}
+    {{ 'style.css' | asset_url | stylesheet_tag: preload: true }}
+
+    {% comment %} {% render 'meta-tags' %} {% endcomment %}
+
+    {{ content_for_header }}
+  </head>
+
+  <body>
+    {% sections 'header-group' %}
+    {% include 'header.liquid' %} <!-- This is the header snippet -->
+
+    <h2 class="tanvir">This is my 1st Theme</h2>
+    <h3>It's time to see, what I can do. to test the limit and bread the rule</h3>
+    <div class="text-red-400">It's time to see, what I can do. to test the limit and bread the rule</div>
+    {{ content_for_layout }}
+
+    {% sections 'footer-group' %}
+  </body>
+</html>
