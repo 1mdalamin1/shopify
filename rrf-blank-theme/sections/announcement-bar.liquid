@@ -1,0 +1,28 @@
+<div class="bg-black text-white py-2 text-center text-sm shahriar-top-bar">
+    <div class="container">
+       {{section.settings.text}}
+    </div>
+</div>
+
+{% schema  %} 
+{
+    "name": "Announcement-Bar",
+    "enabled_on": {
+    "groups": ["header"]
+  },
+    "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "default": "Sign up and get 20% off to your first order.",
+      "label": "text"
+    }
+  ],
+  "presets": [
+            {
+                "name": "Announcement-Bar"
+            }
+        ]
+}
+
+ {% endschema %}  

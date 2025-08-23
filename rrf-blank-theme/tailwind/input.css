@@ -1,1 +1,20 @@
 @import "tailwindcss";
+
+.container{
+    @apply max-w-[1280px] px-4 mx-auto ;
+}
+.shahriar-top-bar a{
+    @apply underline font-bold;
+}
+.main-menu{
+    @apply flex justify-center;
+}
+.main-menu li a{
+    @apply block py-2 px-4;
+}
+input[type="email"] {
+    @apply  focus:outline-none;
+}
+#filter-color > div{
+    @apply mr-4 mb-4;
+}

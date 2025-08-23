@@ -1,6 +1,89 @@
-h2.tanvir {
-    color: green;
+@font-face {
+  font-family: "Satoshi";
+  src: url("Satoshi-Medium.woff2") format("woff2"), url("Satoshi-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
 }
-h3 {
-    color: rgb(245, 133, 4);
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("Satoshi-Bold.woff2") format("woff2"), url("Satoshi-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("Satoshi-Regular.woff2") format("woff2"), url("Satoshi-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Integral CF";
+  src: url("IntegralCF-Bold.woff2") format("woff2"), url("IntegralCF-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+body,
+.single-product-box h3,
+.img_text h3,
+.cart-font h3,
+.cart-font h4,
+.cart-font h2,
+.cart-font span,
+.font_s h2 {
+  font-family: "satoshi", sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Integral CF", sans-serif;
+  font-weight: bold;
+}
+
+.testimonial-carousel > svg {
+  position: absolute;
+  top: -70px;
+  right: 40px;
+  cursor: pointer;
+}
+.testimonial-carousel > svg:last-child {
+  right: 0;
+  top: -74px;
+}
+.testimonial-carousel .slick-list {
+  margin-left: -12px;
+  margin-right: -12px;
+}
+.single_cart_list:last-child .border_none {
+  border-bottom: none;
+}
+.active {
+  border-color: black;
+}
+
+.product_img img {
+  height: 530px;
+  width: 444px;
+}
+.small_img {
+  width: 150px;
+}
+#filter-color > div:nth-child(9) {
+  border: 1px solid #f0eeed;
+}
+.product-item {
+  flex: 1 1 calc({{columns_width}}% - 20px); /* Dynamic width */
+  max-width: calc({{columns_width}}% - 20px); /* Prevent extra stretching */
+}
+.brand-logos img {
+  height: 36px;
 }

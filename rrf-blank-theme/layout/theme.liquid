@@ -1,26 +1,34 @@
 <!doctype html>
 <html lang="{{ request.locale.iso_code }}">
   <head>
-    {% # Inlined CSS Variables %}
-    {% render 'css-variables' %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopify Theme</title>
+    
+    {{ content_for_header }}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js" integrity="sha512-HGOnQO9+SP1V92SrtZfjqxxtLmVzqZpjFFekvzZVWoiASSQgSr4cw9Kqd2+l8Llp4Gm0G8GIFJ4ddwZilcdb8A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="{{ 'main.js' | asset_url }}" defer></script>
 
     {{ 'tailwind.css' | asset_url | stylesheet_tag: preload: true }}
     {{ 'style.css' | asset_url | stylesheet_tag: preload: true }}
 
     {% comment %} {% render 'meta-tags' %} {% endcomment %}
 
-    {{ content_for_header }}
   </head>
 
   <body>
     {% sections 'header-group' %}
-    {% include 'header.liquid' %} <!-- This is the header snippet -->
+    {% comment %} {% include 'header.liquid' %} <!-- This is the header snippet --> {% endcomment %}
 
-    <h2 class="tanvir">This is my 1st Theme</h2>
-    <h3>It's time to see, what I can do. to test the limit and bread the rule</h3>
-    <div class="text-red-400">It's time to see, what I can do. to test the limit and bread the rule</div>
     {{ content_for_layout }}
-
+    
     {% sections 'footer-group' %}
+    {% comment %} {% include 'footer.liquid' %} {% endcomment %}
   </body>
 </html>

@@ -1,0 +1,14 @@
+{
+    "name": "footer",
+    "type": "footer",
+    "sections": {
+        "newsletter-cta": {
+            "type": "newsletter-cta"
+        },
+        "footer": {
+            "type": "footer"
+        }
+    },
+    "order": ["newsletter-cta", "footer"]
+    
+}

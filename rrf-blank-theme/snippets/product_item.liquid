@@ -1,0 +1,30 @@
+<div class="single-product-box">
+  <div class="relative">
+    <a href="{{ product.url }}" class="bg-[#F0EEED] inline-block rounded-lg mb-6 ">
+      <img class="w-full" src="{{'product-1.png' | asset_url}}" alt="">
+    </a>
+    <button
+      data-product-handle="{{ product.handle }}"
+      class="absolute bottom-0 left-0 w-full text-center p-8 cursor-pointer quick-view-btn hover:text-blue-600 "
+    >
+      <span class="text bg-black py-1 px-6 rounded-full text-white">Quick View</span>
+      <span class="loading-icon bg-black py-1 px-6 rounded-full hidden flex justify-center items-center">
+        {% render 'loading-icon' %}
+      </span>
+    </button>
+  </div>
+  <h3 class="text-xl capitalize mb-2">
+    <a href="{{ product.url }}">{{ product.title }}</a>
+  </h3>
+  <div class="flex items-center mb-4 text-[#a4a0a0]">
+    <div class="flex mr-2">
+      {% for i in (1..5) %}
+        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="17" viewBox="0 0 19 17" fill="none">
+          <path d="M9.24494 0.255005L11.8641 5.89491L18.0374 6.6431L13.4829 10.8769L14.679 16.9793L9.24494 13.956L3.8109 16.9793L5.00697 10.8769L0.452479 6.6431L6.62573 5.89491L9.24494 0.255005Z" fill="#FFC633"/>
+        </svg>
+      {% endfor %}
+    </div>
+    4.5/5
+  </div>
+  <div class="text-2xl font-bold">$120</div>
+</div>
