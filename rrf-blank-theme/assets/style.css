@@ -87,3 +87,10 @@ h6 {
 .brand-logos img {
   height: 36px;
 }
+
+.p_img {
+    display: none;
+}
+.p_img.showImg {
+    display: block;
+}

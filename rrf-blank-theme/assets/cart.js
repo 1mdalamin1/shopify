@@ -3,6 +3,10 @@ jQuery(document).ready(function($) {
         
         $("#cart-items").empty();
         $.each(items, function(index, item){
+
+            // {{ cart.item_count }} {{ cart.item_count | pluralize: 'Item', 'Items' }} ({{ cart.total_price | money }})
+            // console.log("single item ", item);
+
             $("#cart-items").append(`
                  <div class="m-6 single_cart_list">
                 
@@ -16,7 +20,7 @@ jQuery(document).ready(function($) {
                             <h2 class="font-bold text-xl pb-1">${item.product_title
                             }</h2>
                             
-                            <span class="font-bold text-2xl">${item.variant_title}</span>
+                            <span class="font-bold text-2xl tanvir_set">${item.quantity} X ${item.presentment_price} = ${item.quantity*item.presentment_price}</span>
                             
                         </div>
                         <div class="w-2/12">
