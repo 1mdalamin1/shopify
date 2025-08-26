@@ -1,14 +1,65 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-    "name": "header",
-    "type": "header",
-    "sections": {
-        "announcement-bar": {
-            "type": "announcement-bar"
-        },
-        "header": {
-            "type": "header"
-        }
+  "name": "header",
+  "type": "header",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "settings": {
+        "text": "Sign up and get 20% off to your first order."
+      }
     },
-    "order": ["announcement-bar", "header"]
-    
+    "header": {
+      "type": "header",
+      "blocks": {
+        "menu_QQkJKW": {
+          "type": "menu",
+          "settings": {
+            "menu_item": "Home",
+            "url": "shopify://pages/test"
+          }
+        },
+        "menu_zbeWqy": {
+          "type": "menu",
+          "settings": {
+            "menu_item": "New Arrivals",
+            "url": "shopify://collections/frontpage"
+          }
+        },
+        "menu_XDRnQG": {
+          "type": "menu",
+          "settings": {
+            "menu_item": "Collections",
+            "url": "shopify://collections"
+          }
+        },
+        "menu_CdK7xn": {
+          "type": "menu",
+          "settings": {
+            "menu_item": "Top Sell",
+            "url": "shopify://collections/top-selling"
+          }
+        }
+      },
+      "block_order": [
+        "menu_QQkJKW",
+        "menu_zbeWqy",
+        "menu_XDRnQG",
+        "menu_CdK7xn"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
 }
