@@ -24,7 +24,7 @@
           "type": "menu",
           "settings": {
             "menu_item": "Home",
-            "url": "shopify://pages/test"
+            "url": "/"
           }
         },
         "menu_zbeWqy": {
@@ -47,13 +47,21 @@
             "menu_item": "Blogs",
             "url": "shopify://blogs/news"
           }
+        },
+        "menu_THHekj": {
+          "type": "menu",
+          "settings": {
+            "menu_item": "Test",
+            "url": "shopify://pages/test"
+          }
         }
       },
       "block_order": [
         "menu_QQkJKW",
         "menu_zbeWqy",
         "menu_XDRnQG",
-        "menu_CdK7xn"
+        "menu_CdK7xn",
+        "menu_THHekj"
       ],
       "settings": {}
     }
