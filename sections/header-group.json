@@ -37,8 +37,8 @@
         "menu_XDRnQG": {
           "type": "menu",
           "settings": {
-            "menu_item": "Collections",
-            "url": "shopify://collections"
+            "menu_item": "Shop",
+            "url": "shopify://collections/all"
           }
         },
         "menu_CdK7xn": {
