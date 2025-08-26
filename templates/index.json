@@ -39,6 +39,17 @@
         "product_columns": "4"
       }
     },
+    "product_grid_m3aA3L": {
+      "type": "product-grid",
+      "name": "Product-Grid",
+      "settings": {
+        "title": "virza kuter",
+        "collection": "virza-kuter",
+        "url": "shopify://collections/virza-kuter",
+        "link_text": "See all",
+        "product_columns": "5"
+      }
+    },
     "product_grid_yakeFG": {
       "type": "product-grid",
       "name": "Product-Grid",
@@ -63,6 +74,7 @@
     "hero",
     "logos",
     "product_grid",
+    "product_grid_m3aA3L",
     "product_grid_yakeFG",
     "categary_box",
     "testimonials"

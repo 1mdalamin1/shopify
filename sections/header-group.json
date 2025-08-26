@@ -30,7 +30,7 @@
         "menu_zbeWqy": {
           "type": "menu",
           "settings": {
-            "menu_item": "New Arrivals",
+            "menu_item": "Top Sell",
             "url": "shopify://collections/frontpage"
           }
         },
@@ -44,8 +44,8 @@
         "menu_CdK7xn": {
           "type": "menu",
           "settings": {
-            "menu_item": "Top Sell",
-            "url": "shopify://collections/top-selling"
+            "menu_item": "Blogs",
+            "url": "shopify://blogs/news"
           }
         }
       },
