@@ -19,13 +19,45 @@
         "logos_pgErpi": {
           "type": "logos",
           "settings": {
-            "image": "shopify://shop_images/female-fashion-model-poses-in-city-street.jpg",
+            "image": "shopify://shop_images/Group-1_0baf57c3-85fa-47b2-a04e-47f4bd3edf69.png",
+            "url": ""
+          }
+        },
+        "logos_xhmYUp": {
+          "type": "logos",
+          "settings": {
+            "image": "shopify://shop_images/Group-4_32fc60fd-7542-4664-9ab0-5c19590f530b.png",
+            "url": ""
+          }
+        },
+        "logos_MRTkrW": {
+          "type": "logos",
+          "settings": {
+            "image": "shopify://shop_images/Group-3_11000fff-af84-46d1-b838-18c28fd66639.png",
+            "url": ""
+          }
+        },
+        "logos_Dx8Dzn": {
+          "type": "logos",
+          "settings": {
+            "image": "shopify://shop_images/Group-2_27d9905f-5b78-4bb2-902e-38b907844c10.png",
+            "url": ""
+          }
+        },
+        "logos_wxFeji": {
+          "type": "logos",
+          "settings": {
+            "image": "shopify://shop_images/Group-5_a403867d-cf66-4fa6-896a-d0e1a2534b27.png",
             "url": ""
           }
         }
       },
       "block_order": [
-        "logos_pgErpi"
+        "logos_pgErpi",
+        "logos_xhmYUp",
+        "logos_MRTkrW",
+        "logos_Dx8Dzn",
+        "logos_wxFeji"
       ],
       "settings": {}
     },
