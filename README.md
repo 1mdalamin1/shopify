@@ -30,16 +30,16 @@ Status | Lectures
 
 To use this repository for making Shopify themes, use the following command of Shopify CLI.
 ```sh
-shopify theme init [ NAME OF YOUR THEME ] --clone-url https://github.com/polidario/Elizabeth_Clean
+shopify theme init [ NAME OF YOUR THEME ]
 ```
 # Or
 ```sh
-shopify theme init [ NAME OF YOUR THEME ] --clone-url https://github.com/1mdalamin1/shopify
+shopify theme init [ NAME OF YOUR THEME ] --clone-url https://github.com/1mdalamin1/shopify/tree/my-shopify
 ```
 
 ## local run this commend in root folder
 ```sh
-shopify theme dev --store vir-za.myshopify.com
+shopify theme dev --store rrfv.myshopify.com
 ```
 If you don't have Shopify CLI installed to your computer, navigate to the [installation page of Shopify CLI](https://shopify.dev/themes/tools/cli/installation).
 

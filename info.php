@@ -27,7 +27,7 @@ shopify theme dev --store vir-za.myshopify.com
 > |=> reference-dawn-theme
 
 > shopify theme dev --store rrfv.myshopify.com
-> npm run dev
+> npm run dev | npm run build
 
 # my 1st theme
 > mkdir rrf-blank-theme | cd rrf-blank-theme
