@@ -1,21 +1,70 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-    "sections": {
-        "hero": {
-            "type": "hero"
-        },
-        "logos": {
-            "type": "logos"
-        },
-        "product_grid": {
-            "type": "product-grid"
-        },
-        "categary_box": {
-            "type": "categary-box"
-        },
-        "testimonials": {
-            "type": "testimonials"
-        }
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {}
     },
-    "order": ["hero", "logos", "product_grid", "categary_box", "testimonials"]
-    
+    "logos": {
+      "type": "logos",
+      "blocks": {
+        "logos_pgErpi": {
+          "type": "logos",
+          "settings": {
+            "image": "shopify://shop_images/female-fashion-model-poses-in-city-street.jpg",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "logos_pgErpi"
+      ],
+      "settings": {}
+    },
+    "product_grid": {
+      "type": "product-grid",
+      "settings": {
+        "title": "NEW ARRIVALS",
+        "collection": "frontpage",
+        "url": "shopify://collections/frontpage",
+        "link_text": "View All",
+        "product_columns": "4"
+      }
+    },
+    "product_grid_yakeFG": {
+      "type": "product-grid",
+      "name": "Product-Grid",
+      "settings": {
+        "title": "Top sell",
+        "collection": "top-selling",
+        "url": "shopify://collections/top-selling",
+        "link_text": "View All",
+        "product_columns": "4"
+      }
+    },
+    "categary_box": {
+      "type": "categary-box",
+      "settings": {}
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "logos",
+    "product_grid",
+    "product_grid_yakeFG",
+    "categary_box",
+    "testimonials"
+  ]
 }
