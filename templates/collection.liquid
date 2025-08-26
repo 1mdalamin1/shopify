@@ -22,15 +22,14 @@
 
                         </div>
                         <ul>
-                            {%  for i in (1..5) %}   
-                            <li class="leading-10">
-                                
-                                <a class="flex justify-between items-center" href="">
-                                    T-shirts
-                                    {% render 'angel-right' %}
-                                </a>
-                            </li>
-                        {% endfor %}
+                            {% for collection_item in collections %}
+        <li class="leading-10">
+            <a class="flex justify-between items-center" href="{{ collection_item.url }}">
+                {{ collection_item.title }}
+                {% render 'angel-right' %}
+            </a>
+        </li>
+    {% endfor %}
                         </ul>
                         <div class="mb-4 border-t border-[#F0EEED] pt-4 mt-8">
                             <button data-id="filter-color" class="flex justify-between items-center w-full text-lg font-bold cursor-pointer">
