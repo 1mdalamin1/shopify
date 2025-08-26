@@ -1,16 +1,16 @@
 [
   {
-    "name": "rrf-blank-theme",
+    "name": "my-shopify",
     "settings": [
       {
         "type": "header",
-        "content": "RRF Blank Theme Settings"
+        "content": "My Shopify Theme Settings"
       },
       {
         "type": "text",
         "id": "theme_name",
         "label": "Theme Name",
-        "default": "RRF Blank Theme"
+        "default": "My Shopify Theme"
       }
     ]
   }

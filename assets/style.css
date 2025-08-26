@@ -94,3 +94,31 @@ h6 {
 .p_img.showImg {
     display: block;
 }
+.blog-pagination span {
+    border: 1px solid #ddd;
+    padding: 4px 10px;
+    margin: 0 3px;
+    transition: .4s;
+    cursor: pointer;
+    box-shadow: 3px 3px 1px black;
+}
+
+.blog-pagination span:hover {
+    color: white;
+    background: black;
+    transition: .4s;
+}
+.blog-pagination span.current {
+    background: black;
+    color: white;
+}
+.blog-pagination span.next, .blog-pagination span.prev {
+    padding-right: 30px;
+    padding-left: 30px;
+}
+.blog-pagination span.next {
+    border-radius: 0 20px 20px 0;
+}
+.blog-pagination span.prev {
+    border-radius: 20px 0 0 20px;
+}
