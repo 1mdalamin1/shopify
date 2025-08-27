@@ -51,8 +51,15 @@
         "menu_THHekj": {
           "type": "menu",
           "settings": {
-            "menu_item": "Test",
+            "menu_item": "Contact",
             "url": "shopify://pages/test"
+          }
+        },
+        "menu_mhjP8D": {
+          "type": "menu",
+          "settings": {
+            "menu_item": "Test",
+            "url": "shopify://pages/test-1"
           }
         }
       },
@@ -61,7 +68,8 @@
         "menu_zbeWqy",
         "menu_XDRnQG",
         "menu_CdK7xn",
-        "menu_THHekj"
+        "menu_THHekj",
+        "menu_mhjP8D"
       ],
       "settings": {}
     }
