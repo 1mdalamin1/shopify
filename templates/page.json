@@ -65,6 +65,9 @@
   },
   "order": [
     "main",
+    "categary_box",
+    "logos",
+    "hero",
     "custom-section"
   ]
 }
