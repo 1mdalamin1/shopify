@@ -15,7 +15,7 @@ import {
 import { authenticate } from "../shopify.server";
 import db from "../db.server";
 import { useLoaderData } from "@remix-run/react";
-import { formatDistanceToNow, parseISO } from 'date-fns';
+import { formatDistance, parseISO } from 'date-fns';
 
 
 
@@ -45,7 +45,14 @@ export const action = async ({ request }) => {
 export default function Index() {
   const wishlistData = useLoaderData();
   const wishlistArray = wishlistData.map((item) => {
-    const createdAt = formatDistanceToNow(parseISO(item.createdAt), { addSuffix: true });
+    // const createdAt = formatDistance(parseISO(item.createdAt), { addSuffix: true });
+    let createdAt = "N/A";
+    if (item.createdAt) {
+      const parsedDate = parseISO(item.createdAt);
+      if (!isNaN(parsedDate)) {
+        createdAt = formatDistance(parsedDate, new Date(), { addSuffix: true });
+      }
+    }
     return [item.customerId, item.productId, createdAt];
   });
 

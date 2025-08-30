@@ -68,7 +68,7 @@
 
 
 
-# 01:18s/25:08s appRemix - 23 |=> https://www.youtube.com/watch?v=1RQmp01vYNk&list=PLB4AdipoHpxZu39dNjUWGRwgeKgW7mVJ-&index=23
+# shopify.app.toml -> application_url = "" |=> D:\shopify\buildify\extensions\wishlist-icon\blocks\wishlist-icon.liquid and set line no 31 appUrl = application_url
 
 */
 
