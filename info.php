@@ -50,8 +50,10 @@
 
   Alpine.js |=> https://alpinejs.dev/globals/alpine-data |=> A rugged, minimal framework for composing JavaScript behavior in your markup.
 
-> shopify app generate extension |=> Issue_Traker_Action
-
+> shopify app generate extension |=> 
+  > Admin action app extensions |=> Issue_Traker_Action 
+  > shopify app build
+  > shopify app deploy
 
 # https://shopify.dev/docs/api/admin-graphql |=> To know more about Admin GraphQL API
 # https://shopify.dev/docs/api/shopify-app-remix/v2/apis/admin-api |=> To know more about Admin API
