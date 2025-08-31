@@ -43,6 +43,7 @@
 > Remix doc |=> https://v2.remix.run/docs/discussion/data-flow/
 > Prisma ORM(Object-Relational Mapping) |=> https://www.prisma.io/ |=> Next-generation Node.js and TypeScript ORM || next-gen serverless Postgres database.
 > npm run prisma migrate dev -- --name create-settings-table |=> https://www.prisma.io/docs/getting-started/quickstart-sqlite
+> npx prisma migrate dev --name add-shop-to-settings |=> if add new column in existing table
 
 > shopify app generate extension |=> https://shopify.dev/docs/apps/build/online-store/theme-app-extensions/build
   > Theme app extensions |=> wishlist-icon |=> https://github.com/Hujjat/wishlist-inspire-app
@@ -59,6 +60,9 @@
 # https://shopify.dev/docs/api/shopify-app-remix/v2/apis/admin-api |=> To know more about Admin API
 
 
+> npm run prisma migrate dev -- --name create-settings-table |=> https://www.prisma.io/docs/getting-started/quickstart-sqlite
+> npx prisma migrate dev --name add-shop-to-settings |=> if add new column in existing table
+  > npx prisma generate |=> Generates the Prisma Client
 > npm run prisma studio | it run http://localhost:5555/ |=> GUI to view and edit data in your database.
 
 > shopify app dev || npm run dev -- --theme [add_your_theme_id_here] |=> to see the changes in the store
@@ -74,4 +78,5 @@
 
 */
 
-
+# https://polaris-react.shopify.com/design/pro-design-language#what-is-pro
+# https://shopify.dev/docs/api/shopify-app-remix/v1/apis/admin-api

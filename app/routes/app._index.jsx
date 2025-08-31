@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { json } from "@remix-run/node";
 import {
   Page,
   Layout,
@@ -16,13 +14,15 @@ import { authenticate } from "../shopify.server";
 import db from "../db.server";
 import { useLoaderData } from "@remix-run/react";
 import { formatDistance, parseISO } from 'date-fns';
+import { json } from "@remix-run/node";
 
 
 
 export const loader = async ({ request }) => {
   const auth = await authenticate.admin(request);
   const shop = auth.session.shop;
-  console.log('shop: -------> ', shop);
+  const { admin } = await authenticate.admin(request);
+
   // get data from database for that shop acending by id
   const wishlistData = await db.wishlist.findMany({
     where: {
@@ -33,9 +33,87 @@ export const loader = async ({ request }) => {
     },
   });
 
-  console.log('wishlistData: -------> ', wishlistData);
+  // Extract unique customer and product IDs
+  const productIds = [...new Set(wishlistData.map(item => item.productId))];
 
-  return json(wishlistData);
+
+  // Fetch product data from Shopify
+  const productData = await Promise.all(
+    productIds.map(async (productId) => {
+      try {
+        const response = await admin.graphql(
+          `#graphql
+          query GetProduct($id: ID!) {
+            product(id: $id) {
+              id
+              title
+              featuredImage {
+                url
+                altText
+              }
+              variants(first: 1) {
+                edges {
+                  node {
+                    price
+                  }
+                }
+              }
+            }
+          }`,
+          {
+            variables: {
+              id: `gid://shopify/Product/${productId}`
+            }
+          }
+        );
+        const data = await response.json();
+        return data.data.product;
+      } catch (error) {
+        console.error(`Error fetching product ${productId}:`, error);
+        return { 
+          id: productId, 
+          title: 'Unknown Product', 
+          featuredImage: null,
+          variants: { edges: [] }
+        };
+      }
+    })
+  );
+
+  const productsById = productData.reduce((acc, product) => {
+    const id = product.id.split('/').pop(); // Extract numeric ID from gid
+    acc[id] = product;
+    return acc;
+  }, {});
+
+  // Enrich wishlist data with customerId and product information
+  const enrichedWishlistData = wishlistData.map(item => {
+    const product = productsById[item.productId] || { 
+      title: 'Unknown Product', 
+      featuredImage: null,
+      variants: { edges: [] }
+    };
+    
+    const price = product.variants.edges[0]?.node?.price || '0.00';
+    const imgUrl = product.featuredImage?.url || null;
+
+    return {
+      id: item.id,
+      customerId: item.customerId,
+      productId: item.productId,
+      productTitle: product.title,
+      productPrice: `${price}`,
+      productImage: `${imgUrl}`,
+      productImageAlt: product.featuredImage?.altText || product.title,
+      shop: item.shop,
+      createdAt: item.createdAt
+    };
+  });
+
+  // console.log('Enriched wishlistData: -------> ', enrichedWishlistData);
+
+  return json(enrichedWishlistData);
+
 };
 
 export const action = async ({ request }) => {
@@ -45,7 +123,7 @@ export const action = async ({ request }) => {
 export default function Index() {
   const wishlistData = useLoaderData();
   const wishlistArray = wishlistData.map((item) => {
-    // const createdAt = formatDistance(parseISO(item.createdAt), { addSuffix: true });
+    
     let createdAt = "N/A";
     if (item.createdAt) {
       const parsedDate = parseISO(item.createdAt);
@@ -53,7 +131,26 @@ export default function Index() {
         createdAt = formatDistance(parsedDate, new Date(), { addSuffix: true });
       }
     }
-    return [item.customerId, item.productId, createdAt];
+
+    const productImage = (
+      <img
+        src={item.productImage || "/puzzle.png"}
+        alt={item.productImageAlt || "Product Image"}
+        style={{ width: 80, height: "auto", objectFit: "contain" }}
+      />
+    );
+
+    // Format price with currency symbol (USD)
+    const formattedPrice = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    }).format(Number(item.productPrice));
+
+    const productTitle = item.productTitle.length > 20 ? item.productTitle.slice(0, 20) + '...' : item.productTitle;
+    const productIdTitle = (<>{item.productId}<br/>{productTitle}</>);
+    const customerIdTime = (<><strong>{item.customerId}</strong><br/>{createdAt}</>);
+
+    return [productImage, customerIdTime, productIdTitle, formattedPrice];
   });
 
 
@@ -71,29 +168,36 @@ export default function Index() {
                       'text',
                       'text',
                       'text',
+                      'text',
+                      'text',
+                      'text',
+                      'text',
                     ]}
                     headings={[
-                      'Customer ID',
-                      'Product ID',
-                      'Created At',
+                      'Image',
+                      'Customer ID & Time',
+                      'Product ID & Title',
+                      'Price',
                     ]}
                     rows={wishlistArray}/>
+
               ) : (
                 <EmptyState
                   heading="Manage your wishlist products here"
                   action={{
                     content: 'Learn more',
-                    url: 'https://youtube.com/codeinspire',
+                    url: 'https://vir-za.com/contact',
                     external: "true",
                   }}
                   secondaryAction={{
-                    content: 'Watch videos',
-                    url: 'https://youtube.com/codeinspire',
+                    content: 'Facebook',
+                    url: 'https://facebook.com/virza805',
                     external: "true",
                   }}
-                  image="https://cdn.shopify.com/s/files/1/0262/4071/2726/files/emptystate-files.png"
+                  image="/contruction.png"
                 >
                   <p>You don't have any products in your wishlist yet.</p>
+                  {/* https://cdn.shopify.com/s/files/1/0262/4071/2726/files/emptystate-files.png */}
                 </EmptyState>
               )}
 
@@ -112,15 +216,15 @@ export default function Index() {
                       <Text as="span" variant="bodyMd">
                         Course content
                       </Text>
-                      <Link url="https://youtube.com/codeinspire" target="_blank" removeUnderline>
-                        Codeinspire
+                      <Link url="https://youtube.com/@1mdalamin1" target="_blank" removeUnderline>
+                        1mdalamin1
                       </Link>
                     </InlineStack>
                     <InlineStack align="space-between">
                       <Text as="span" variant="bodyMd">
                         Source code
                       </Text>
-                      <Link url="https://github.com/Hujjat" target="_blank" removeUnderline>
+                      <Link url="https://github.com/1mdalamin1" target="_blank" removeUnderline>
                         Github
                       </Link>
                     </InlineStack>
@@ -192,12 +296,13 @@ export default function Index() {
                   <Text as="h2" variant="headingMd">
                     Next steps
                   </Text>
+                  <img src="/puzzle.png" alt="My App Logo" />
                   <List>
                     <List.Item>
                       Build a
-                      <Link url="https://youtube.com/codeinspire" target="_blank" removeUnderline >
+                      <Link url="https://www.youtube.com/@1mdalamin1" target="_blank" removeUnderline >
                         {" "}
-                        Wishlist app
+                        Buildify App
                       </Link>{" "}
                       to get started
                     </List.Item>

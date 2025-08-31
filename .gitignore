@@ -4,7 +4,7 @@ node_modules
 /.cache
 /build
 /app/build
-/public/build/
+# /public/build/
 /public/_dev
 /app/public/build
 /prisma/dev.sqlite
@@ -12,14 +12,15 @@ node_modules
 database.sqlite
 
 my-shopify
-.env
+wishlist-inspire-app
+# .env
 .env.*
 
 
 
 
 
-/extensions/*/dist
+# /extensions/*/dist
 
 # Ignore shopify files created during app dev
 .shopify/*
