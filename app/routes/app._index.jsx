@@ -194,10 +194,13 @@ export default function Index() {
                     url: 'https://facebook.com/virza805',
                     external: "true",
                   }}
-                  image="/contruction.png"
+                  image="/blank.png"
                 >
+                  {/* <div style={{ width: 200, margin: "0 auto" }}>
+                    <img src="https://cdn.shopify.com/s/files/1/0262/4071/2726/files/emptystate-files.png" alt="Construction" style={{ width: "100%" }} />
+                  </div> */}
                   <p>You don't have any products in your wishlist yet.</p>
-                  {/* https://cdn.shopify.com/s/files/1/0262/4071/2726/files/emptystate-files.png */}
+                 
                 </EmptyState>
               )}
 

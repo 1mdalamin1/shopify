@@ -31,10 +31,10 @@ Visit the [`shopify.dev` documentation](https://shopify.dev/docs/api/shopify-app
 
 If you used the CLI to create the template, you can skip this section.
 
-Using yarn:
+install shopify cli globally:
 
 ```shell
-yarn install
+npm install -g @shopify/cli@latest
 ```
 
 Using npm:
@@ -43,30 +43,37 @@ Using npm:
 npm install
 ```
 
-Using pnpm:
+For Runing shopify in local:
 
 ```shell
-pnpm install
+shopify app dev
 ```
-
-### Local Development
-
-Using yarn:
-
-```shell
-yarn dev
-```
-
-Using npm:
+Or:
 
 ```shell
 npm run dev
 ```
-
-Using pnpm:
+Or You need to run spacific theme to test like draft theme :
 
 ```shell
-pnpm run dev
+npm run dev -- --theme add_your_theme_id_here
+```
+
+It run http://localhost:5555/ 
+
+```shell
+npm run prisma studio
+```
+
+App Build comment:
+
+```shell
+shopify app build
+```
+App deploy comment:
+
+```shell
+shopify app deploy
 ```
 
 Press P to open the URL to your app. Once you click install, you can start development.
