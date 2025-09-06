@@ -199,7 +199,7 @@ export default function Index() {
                   {/* <div style={{ width: 200, margin: "0 auto" }}>
                     <img src="https://cdn.shopify.com/s/files/1/0262/4071/2726/files/emptystate-files.png" alt="Construction" style={{ width: "100%" }} />
                   </div> */}
-                  <p>You don't have any products in your wishlist yet.</p>
+                  <p class="">You don't have any products in your wishlist yet.</p>
                  
                 </EmptyState>
               )}

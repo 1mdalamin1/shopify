@@ -1,0 +1,354 @@
+
+{% comment %} {% if template.name == 'product' %}
+  {% render 'prouduct-faq-component' %}
+{% endif %} {% endcomment %}
+
+<div class="faq-wrap w-full bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+
+  {%- if block.settings.title != blank -%}
+    <h2 class="faq-section-title" style="text-align: {{ block.settings.title_alignment }}; font-size: {{ block.settings.section_title_size }}px; color: {{ block.settings.section_title_color }}; margin-bottom: 20px;">
+      {{ block.settings.title }}
+    </h2>
+  {%- else -%}
+    {% comment %} <h2 class="faq-section-title" style="color:red;">No title found in section.settings</h2> {% endcomment %}
+  {%- endif -%}
+
+
+
+  {% comment %} {{ block.settings | json }} {% endcomment %}
+  {% comment %} <div class="bg-red-500">
+    {{ block.settings.first_item_open }}
+  </div> {% endcomment %}
+  {% comment %} {% assign  %} {% endcomment %}
+  <!-- DEBUG: Output the entire metafield object -->
+  {% comment %} <p>Metafield exists: {{ product.metafields.faq.faqs }}</p> {% endcomment %}
+
+
+  <div class="border-t border-gray-200 dark:border-gray-600">
+    <div class="p-4 bg-white rounded-lg dark:bg-gray-800">
+      {% for faq in product.metafields.faq.faqs.value %}
+        <div class="bufy-faq-item {% if forloop.index == 1 and block.settings.first_item_open %}active-faq-item{% else %}{% endif %}">
+          <h2 class="bufy-faq-title cursor-pointer">
+            <span>{{ forloop.index }}. {{ faq.title }}</span>
+            <svg class="w-3 h-3 shrink-0 {% if forloop.index == 1 and block.settings.first_item_open %}{% else %}rotate-180{% endif %}" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+            </svg>
+          </h2>
+          <div class="bufy-faq-dec {% if forloop.index == 1 and block.settings.first_item_open %}{% else %}hidden{% endif %} ">
+            <div class="py-5 border-b border-gray-200 dark:border-gray-700">
+              <p class="text-gray-500 dark:text-gray-400">{{ faq.description }}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</div>
+
+{{ 'tailwind.css' | asset_url | stylesheet_tag }}
+{%- style -%}
+  .active-faq-item {
+    background-color: {{ block.settings.active_bg_color }};
+  }
+  .faq-wrap {
+    background: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+    border: 1px solid {{ block.settings.border_color }};
+    margin: {{ block.settings.margin_top | default: 20 }}px 0 {{ block.settings.margin_bottom | default: 20 }}px 0;
+    padding: {{ block.settings.padding | default: 20 }}px;
+  }
+  
+  .faq-title {
+    color: {{ block.settings.title_color }};
+    font-weight: {{ block.settings.title_weight }};
+    font-size: {{ block.settings.title_size }}px;
+  }
+  
+  .faq-title:hover {
+    color: {{ block.settings.title_hover_color }};
+  }
+  
+  .faq-dec {
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.text_size }}px;
+  }
+  
+  .faq-dec a {
+    color: {{ block.settings.link_color }};
+    text-decoration: underline;
+  }
+  
+  .faq-dec a:hover {
+    color: {{ block.settings.link_hover_color }};
+  }
+
+  [data-accordion-icon].rotate-180 {
+    transform: rotate(180deg);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  [data-accordion-icon]:not(.rotate-180) {
+    transform: rotate(0deg);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  {%- if block.settings.custom_css != blank -%}
+    {{ block.settings.custom_css }}
+  {%- endif -%}
+{%- endstyle -%}
+
+
+{% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> {% endcomment %}
+
+<script>
+
+  {% comment %} jQuery(document).ready(function($) {
+    $('.bufy-faq-title').on('click', function(){
+      let currentParent = $(this).parent();
+      currentParent.find('.bufy-faq-dec').toggleClass('hidden');
+      currentParent.find('svg').toggleClass('rotate-180');
+      
+    });
+  }); {% endcomment %}
+
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".bufy-faq-title").forEach(function (title) {
+      title.addEventListener("click", function () {
+        let currentParent = this.parentElement;
+        currentParent.classList.toggle("active-faq-item");
+
+        // Toggle .hidden on .bufy-faq-dec inside the parent
+        let desc = currentParent.querySelector(".bufy-faq-dec");
+        if (desc) {
+          desc.classList.toggle("hidden");
+        }
+
+        // Toggle .rotate-180 on svg inside the parent
+        let svg = currentParent.querySelector("svg");
+        if (svg) {
+          svg.classList.toggle("rotate-180");
+        }
+      });
+    });
+  });
+
+</script>
+
+{% schema %}
+{
+  "name": "Product FAQ",
+  "target": "section",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "product",
+      "autofill": true
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "label": "title",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "id": "title_alignment",
+      "type": "select",
+      "label": "Title Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "id": "section_title_size",
+      "type": "range",
+      "min": 16,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Section Title Size",
+      "default": 24
+    },
+    {
+      "id": "section_title_color",
+      "type": "color",
+      "label": "Section Title Color",
+      "default": "#333333"
+    },
+    {
+      "id": "first_item_open",
+      "type": "checkbox",
+      "label": "Open First Item by Default",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Styling Options"
+    },
+    {
+      "id": "background_color",
+      "type": "color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "id": "border_color",
+      "type": "color",
+      "label": "Border Color",
+      "default": "#e5e7eb"
+    },
+    {
+      "id": "border_radius",
+      "type": "range",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Border Radius",
+      "default": 8
+    },
+    {
+      "id": "margin_top",
+      "type": "range",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Top Margin",
+      "default": 20
+    },
+    {
+      "id": "margin_bottom",
+      "type": "range",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom Margin",
+      "default": 20
+    },
+    {
+      "id": "padding",
+      "type": "range",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Inner Padding",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Title Styling"
+    },
+    {
+      "id": "title_color",
+      "type": "color",
+      "label": "Title Color",
+      "default": "#6b7280"
+    },
+    {
+      "id": "title_hover_color",
+      "type": "color",
+      "label": "Title Hover Color",
+      "default": "#111827"
+    },
+    {
+      "id": "title_size",
+      "type": "range",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Title Font Size",
+      "default": 16
+    },
+    {
+      "id": "title_weight",
+      "type": "select",
+      "label": "Title Font Weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "header",
+      "content": "Content Styling"
+    },
+    {
+      "id": "text_color",
+      "type": "color",
+      "label": "Text Color",
+      "default": "#6b7280"
+    },
+    {
+      "id": "text_size",
+      "type": "range",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Text Font Size",
+      "default": 16
+    },
+    {
+      "id": "link_color",
+      "type": "color",
+      "label": "Link Color",
+      "default": "#3b82f6"
+    },
+    {
+      "id": "link_hover_color",
+      "type": "color",
+      "label": "Link Hover Color",
+      "default": "#2563eb"
+    },
+    {
+      "id": "active_bg_color",
+      "type": "color",
+      "label": "Active BG Color",
+      "default": "#c2d6c0"
+    },
+    {
+      "type": "header",
+      "content": "Advanced"
+    },
+    {
+      "id": "custom_css",
+      "type": "textarea",
+      "label": "Custom CSS",
+      "info": "Add additional CSS rules here"
+    }
+  ]
+}
+{% endschema %}
+

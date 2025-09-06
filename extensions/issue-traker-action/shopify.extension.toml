@@ -11,6 +11,15 @@ module = "./src/ActionExtension.jsx"
 # The target used here must match the target used in the module file (./src/ActionExtension.jsx)
 target = "admin.product-details.action.render"
 
+[[extensions]]
+name = "Product FAQ Input"
+handle = "product-faq-input"
+type = "ui_extension"
+
+[[extensions.targeting]]
+module = "./src/ProductFaqInput.jsx"
+target = "admin.product-details.action.render"
+
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
 scopes = "write_products"

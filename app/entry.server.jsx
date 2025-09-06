@@ -26,6 +26,9 @@ export default async function handleRequest(
           const stream = createReadableStreamFromReadable(body);
 
           responseHeaders.set("Content-Type", "text/html");
+          // Set CORS header here if needed
+          responseHeaders.set("Access-Control-Allow-Origin", "*");
+
           resolve(
             new Response(stream, {
               headers: responseHeaders,
