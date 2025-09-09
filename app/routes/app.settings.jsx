@@ -83,8 +83,8 @@ export default function SettingsPage() {
           <Card roundedAbove="sm">
             <Form method="POST">
               <BlockStack gap="400">
-                <TextField label="App name" name="name" value={formState?.name} onChange={(value) => setFormState({ ...formState, name: value })} />
-                <TextField label="Description" name="description" value={formState?.description} onChange={(value) => setFormState({ ...formState, description: value })} />
+                <TextField label="Name" name="name" value={formState?.name} onChange={(value) => setFormState({ ...formState, name: value })} />
+                <TextField label="Description with contact info." name="description" value={formState?.description} onChange={(value) => setFormState({ ...formState, description: value })} />
 
                 <Button submit={true}>Save </Button>
               </BlockStack>

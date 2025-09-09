@@ -1,0 +1,114 @@
+<div class="wish-list-icon-wrap">
+    <button data-product-handle="{{ product.handle }}" class="bg-white shadow p-2 mb-2 wishlist-btn cursor-pointer">
+      <span class="text">
+        {% render 'heart-icon' %}
+      </span>
+      <span class="wish-listed hidden">
+        {% render 'heart-icon-solid' %}
+      </span>
+      {% if block.settings.text != blank %}
+        <span class="wish-list-text">{{ block.settings.text }}</span>
+      {% endif %}
+    </button>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Wishlist button click handler
+    document.querySelectorAll(".wishlist-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+            let product_handle = this.dataset.productHandle;
+            let wishlist = [];
+
+            try {
+                wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+            } catch (e) {
+                wishlist = [];
+            }
+
+            const index = wishlist.indexOf(product_handle);
+
+            if (index > -1) {
+                // Remove product_handle if it exists
+                this.querySelector(".text").classList.remove("hidden");
+                this.querySelector(".wish-listed").classList.add("hidden");
+                wishlist.splice(index, 1);
+            } else {
+                // Add product_handle if it doesn't exist
+                this.querySelector(".text").classList.add("hidden");
+                this.querySelector(".wish-listed").classList.remove("hidden");
+                wishlist.push(product_handle);
+            }
+
+            // Update wishlist counter
+            const counter = document.querySelector(".show-wishlist-btn > span");
+            if (counter) {
+                counter.textContent = wishlist.length;
+            }
+
+            // Save to localStorage
+            localStorage.setItem("wishlist", JSON.stringify(wishlist));
+        });
+    });
+  });
+</script>
+
+{{ 'tailwind.css' | asset_url | stylesheet_tag }}
+<style>
+  .wish-list-icon-wrap {
+    display: flex;
+    justify-content: center;
+    max-width: 44rem;
+  }
+  .wish-list-icon-wrap button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .wish-list-icon-wrap svg {
+    width: 2rem;
+    height: 2rem;
+  }
+  {%- if block.settings.custom_css != blank -%}
+    {{ block.settings.custom_css }}
+  {%- endif -%}
+</style>
+
+{% schema %}
+{
+  "name": "Wish List",
+  "target": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "product",
+      "autofill": true
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "Add to Wish List"
+    },
+    {
+        "type": "header",
+        "content": "Advanced"
+    },
+    {
+        "id": "custom_css",
+        "type": "textarea",
+        "label": "Custom CSS",
+        "info": "Add additional CSS rules here"
+    }
+  ]
+}
+{% endschema %}

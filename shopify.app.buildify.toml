@@ -1,0 +1,21 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "f737cd5cd2dbfd57a7354546123dcdeb"
+name = "buildify"
+application_url = "https://premium-considering-glance-p.trycloudflare.com"
+embedded = true
+
+[build]
+automatically_update_urls_on_dev = true
+include_config_on_deploy = true
+
+[webhooks]
+api_version = "2025-10"
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "read_customers,read_themes,write_products,write_themes"
+
+[auth]
+# redirect_urls = [ "https://example.com/api/auth" ]
+redirect_urls = ["https://premium-considering-glance-p.trycloudflare.com/auth/callback", "https://premium-considering-glance-p.trycloudflare.com/auth/shopify/callback", "https://premium-considering-glance-p.trycloudflare.com/api/auth/callback"]

@@ -1,4 +1,7 @@
 name = "theme-apps"
+
+uid = "704afbf7-be4e-9f8f-e8f4-a74e0f9037a24b36be14"
+
 type = "theme"
-description = "Buildify theme app extensions functionality | wishlist-icon"
+description = "Buildify theme app extensions functionality"
 

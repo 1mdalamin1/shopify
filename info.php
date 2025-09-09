@@ -2,7 +2,7 @@
 /*
 
 # bufy |=> Buildify app prefix | The best page builder for Shopify
-# shopify app | Buildify → Buildify Page Builder ("The best page builder for Shopify" in app description) { main compititor is PageFly, Gempages, Shogun & Pagetify, Canva page builder, Insert page builder }
+# shopify app | Buildify → Buildify Page Builder ("The best page builder for Shopify" in app description) { main compititor is Section Store, PageFly, Gempages, Shogun & Pagetify, Canva page builder, Insert page builder }
 
 # npm install -g @shopify/cli@latest |=> install shopify cli globally 
 
@@ -55,12 +55,10 @@
   > shopify app build
   > shopify app deploy
 > npm run tailwind:dev:app |=> to run tailwind css in dev mode for app
-  > tailwind:build:app
+  > npm run tailwind:build:app
 > npm run tailwind:dev:extensions:theme-apps |=> package.json setting > to run tailwind css in dev mode for wishlist-icon extension
-  > napm run tailwind:build:extensions:theme-apps || create tailwind.input.css <- @import "tailwindcss"; && create assets/tailwind.css
+  > npm run tailwind:build:extensions:theme-apps || create tailwind.input.css <- @import "tailwindcss"; && create assets/tailwind.css
 >
-
-
 
 
 # shopify.app.toml -> application_url = "" |=> D:\shopify\buildify\extensions\wishlist-icon\blocks\wishlist-icon.liquid and set line no 31 appUrl = application_url
@@ -71,7 +69,23 @@
   {{ product.metafields.namespace.key }}
   {{ product.metafields.namespace.key.value }}
 
+
+  shopify app import-extensions
+  shopify app config link || shopify app config list
+
+  shopify app config use --config=buildify-3
 */
 
 # https://polaris-react.shopify.com/design/pro-design-language#what-is-pro
 # https://shopify.dev/docs/api/shopify-app-remix/v1/apis/admin-api
+
+# https://shopify.dev/docs/api/admin-rest/latest/resources/asset#get-themes-theme-id-assets
+# https://shopify.dev/docs/api/admin-graphql/latest/mutations/themeFilesUpsert?language=remix
+# https://docs.google.com/forms/d/e/1FAIpQLSfZTB1vxFC5d1-GPdqYunWRGUoDcOheHQzfK2RoEFEHrknt5g/viewform
+
+
+
+// App ID gid://shopify/App/277218033665
+// https://involvement-kai-man-pvc.trycloudflare.com/
+
+// this is my app it developing with last some days. Last day i have done with shopify app extension only app. Today I need to change this app, So i try to run shopify app dev commend but it give me new app like biuldify-4. Now i need work on biuldify-3. priviews day i was run "shopify app dev " comment it work fine and automaticlay change shopify.app.toml file. Today i See new file shopify.app.buildify.toml. Now i need to run biuldify-3 app. How can i do this? and how can i change trycloudflare.com. Please help me.

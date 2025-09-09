@@ -13,17 +13,6 @@
     {% comment %} <h2 class="faq-section-title" style="color:red;">No title found in section.settings</h2> {% endcomment %}
   {%- endif -%}
 
-
-
-  {% comment %} {{ block.settings | json }} {% endcomment %}
-  {% comment %} <div class="bg-red-500">
-    {{ block.settings.first_item_open }}
-  </div> {% endcomment %}
-  {% comment %} {% assign  %} {% endcomment %}
-  <!-- DEBUG: Output the entire metafield object -->
-  {% comment %} <p>Metafield exists: {{ product.metafields.faq.faqs }}</p> {% endcomment %}
-
-
   <div class="border-t border-gray-200 dark:border-gray-600">
     <div class="p-4 bg-white rounded-lg dark:bg-gray-800">
       {% for faq in product.metafields.faq.faqs.value %}
@@ -139,6 +128,9 @@
 {
   "name": "Product FAQ",
   "target": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "settings": [
     {
       "type": "product",

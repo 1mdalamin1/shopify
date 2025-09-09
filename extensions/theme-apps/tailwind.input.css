@@ -3,3 +3,9 @@
 .bufy-faq-title{
     @apply flex items-center justify-between w-full py-5 font-medium text-left rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400;
 }
+.bufy-faq-title:hover{
+    @apply text-gray-700 dark:text-gray-300;
+}
+.bufy-btn-black {
+    @apply cursor-pointer bg-black px-4 py-2 text-white text-center hover:border hover:border-gray-200 hover:bg-white hover:text-black w-full;
+}

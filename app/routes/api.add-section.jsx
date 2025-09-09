@@ -1,0 +1,868 @@
+// app/routes/api.add-section.js
+import { json } from "@remix-run/node";
+import { authenticate } from "../shopify.server";
+
+export const action = async ({ request }) => {
+    try {
+        const { admin } = await authenticate.admin(request);
+        
+        // Query for main theme
+        const themesQuery = await admin.graphql(
+            `#graphql
+            query GetThemes {
+                themes(first: 10) {
+                    edges {
+                        node {
+                            id
+                            name
+                            role
+                        }
+                    }
+                }
+            }`
+        );
+        
+        const themesData = await themesQuery.json();
+        
+        // Check for GraphQL errors
+        if (themesData.errors) {
+            return json({ 
+                errors: themesData.errors 
+            }, { status: 400 });
+        }
+        
+        const mainTheme = themesData.data.themes.edges.find(edge => edge.node.role === 'MAIN');
+        
+        if (!mainTheme) {
+            return json({ 
+                errors: [{ 
+                    message: "Main theme not found",
+                    extensions: { code: "THEME_NOT_FOUND" }
+                }] 
+            }, { status: 404 });
+        }
+
+        const sectionContent = `
+        {%- liquid
+
+  assign padding_horizontal = section.settings.padding_horizontal
+  assign padding_horizontal_mobile = section.settings.padding_horizontal_mobile
+  assign padding_top = section.settings.padding_top
+  assign padding_bottom = section.settings.padding_bottom
+  assign border_color = section.settings.border_color
+  assign border_thickness = section.settings.border_thickness
+  assign margin_top = section.settings.margin_top
+  assign margin_bottom = section.settings.margin_bottom
+  assign background_color = section.settings.background_color
+  assign background_gradient = section.settings.background_gradient
+  assign full_width = section.settings.full_width
+  assign content_width = section.settings.content_width
+  assign lazy = section.settings.lazy
+
+  assign bufy_row = section.settings.bufy_row
+  assign bufy_row_mobile = section.settings.bufy_row_mobile
+  assign bufy_gap_mobile = section.settings.bufy_gap_mobile
+  assign bufy_gap = section.settings.bufy_gap
+  assign bufy_padding_vertical = section.settings.bufy_padding_vertical
+  assign bufy_padding_horizontal = section.settings.bufy_padding_horizontal
+  assign bufy_border_thickness = section.settings.bufy_border_thickness
+  assign bufy_border_color = section.settings.bufy_border_color
+  assign bufy_bg = section.settings.bufy_bg
+  assign bufy_radius = section.settings.bufy_radius
+  assign bufy_shadow_color = section.settings.bufy_shadow_color
+  assign bufy_shadow = section.settings.bufy_shadow
+  
+  assign bufy_heading_size = section.settings.bufy_heading_size
+  assign bufy_heading_size_mobile = section.settings.bufy_heading_size_mobile
+  assign bufy_heading_color = section.settings.bufy_heading_color
+  assign bufy_heading_custom = section.settings.bufy_heading_custom
+  assign bufy_heading_font = section.settings.bufy_heading_font
+  assign bufy_heading_height = section.settings.bufy_heading_height
+
+  assign bufy_text_size = section.settings.bufy_text_size
+  assign bufy_text_size_mobile = section.settings.bufy_text_size_mobile
+  assign bufy_text_color = section.settings.bufy_text_color
+  assign bufy_text_custom = section.settings.bufy_text_custom
+  assign bufy_text_font = section.settings.bufy_text_font
+  assign bufy_text_height = section.settings.bufy_text_height
+  assign bufy_text_mt = section.settings.bufy_text_mt
+
+  assign bufy_icon_size_mobile = section.settings.bufy_icon_size_mobile
+  assign bufy_icon_size = section.settings.bufy_icon_size
+  assign bufy_icon_color = section.settings.bufy_icon_color
+   
+-%}
+{% style %}
+
+  {{ bufy_text_font | font_face: font_display: 'swap' }}
+  {{ bufy_heading_font | font_face: font_display: 'swap' }}
+
+  .section-{{ section.id }} {
+    border-top: solid {{ border_color }} {{ border_thickness }}px;
+    border-bottom: solid {{ border_color }} {{ border_thickness }}px;
+    margin-top: {{ margin_top | times: 0.75 | round: 0 }}px;
+    margin-bottom: {{ margin_bottom | times: 0.75 | round: 0 }}px;
+  }
+  
+  .section-{{ section.id }}-settings {
+    margin: 0 auto;
+    padding-top: {{ padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ padding_bottom | times: 0.75 | round: 0 }}px;
+    padding-left: {{ padding_horizontal_mobile }}rem;
+    padding-right: {{ padding_horizontal_mobile }}rem;
+  }
+
+  .bufy-{{ section.id }} .box__title {
+    margin: 0px;
+    font-size: {{ bufy_heading_size_mobile }}px;
+    color: {{ bufy_heading_color }};
+    line-height: {{ bufy_heading_height }}%;
+    text-transform: unset;
+    font-weight: bold;
+    margin-top: {{section.settings.bufy_heading_mt}}px;
+  }
+  
+  .bufy-{{ section.id }} .box__description {
+    margin-top: {{ bufy_text_mt | times: 0.75 | round: 0 }}px;
+  }
+
+  .bufy-{{ section.id }} .box__description * {
+    margin: 0px;
+    font-size: {{ bufy_text_size_mobile }}px;
+    color: {{ bufy_text_color }};
+    line-height: {{ bufy_text_height }}%;
+    text-transform: unset;
+  }
+
+  .bufy-{{ section.id }} .wrapper-box {
+    display: grid;
+    grid-template-columns: repeat({{ bufy_row_mobile}}, 1fr);
+    background-color: {{ bufy_bg }}; 
+    border: {{ bufy_border_thickness }}px solid {{ bufy_border_color }};
+    border-radius: {{ bufy_radius }}px;
+    padding: {{ bufy_padding_vertical | times: 0.75 | round: 0 }}px {{ bufy_padding_horizontal | times: 0.75 | round: 0 }}px;
+    gap: {{ bufy_gap_mobile }}px;
+  }
+  
+  .bufy-{{ section.id }} .box:not(:nth-child(2)) .box__content-wrapper {
+    padding-right: 10px;
+  }
+  
+  .bufy-{{ section.id }} .box {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    gap: 5px;
+  }
+  
+  .bufy-{{ section.id }} .box__image {
+    display:flex;
+    margin-right: 10px;
+    flex: 0 0 {{ bufy_icon_size_mobile }}px;
+    height: {{ bufy_icon_size_mobile }}px;
+  }
+
+  .bufy-{{ section.id }} .box__image img,
+  .bufy-{{ section.id }} .box__image svg {
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .bufy-{{ section.id }} .box__image svg path {
+    fill: {{ bufy_icon_color }};
+  }
+
+  @media(min-width: 768px) {
+
+    .section-{{ section.id }} {
+      margin-top: {{ margin_top }}px;
+      margin-bottom: {{ margin_bottom }}px;
+    }
+    
+    .section-{{ section.id }}-settings {
+      padding: 0 5rem;
+      padding-top: {{ padding_top }}px;
+      padding-bottom: {{ padding_bottom }}px;
+      padding-left: {{ padding_horizontal }}rem;
+      padding-right: {{ padding_horizontal }}rem;
+    }
+
+    .bufy-{{ section.id }} .wrapper-box {
+      grid-template-columns: repeat({{ bufy_row }}, 1fr);
+      padding: {{ bufy_padding_vertical }}px {{ bufy_padding_horizontal }}px;
+      gap: {{ bufy_gap }}px;
+    }
+
+    .bufy-{{ section.id }} .box {
+      flex: 1 0 auto;
+    }
+    
+    .bufy-{{ section.id }} .box__title {
+      font-size: {{ bufy_heading_size }}px;
+    }
+
+    .bufy-{{ section.id }} .box__description {
+      margin-top: {{ bufy_text_mt }}px;
+    }
+
+    .bufy-{{ section.id }} .box__description * {
+      font-size: {{ bufy_text_size }}px;
+    }
+
+    .section-{{ section.id }}-settings .box__image {
+      flex: 0 0 {{ bufy_icon_size }}px;
+      height: {{ bufy_icon_size }}px;
+    }
+  }
+{% endstyle %}
+
+{% if bufy_heading_custom %}
+  <style>
+    .bufy-{{ section.id }} .box__title {
+      font-family: {{ bufy_heading_font.family }}, {{ bufy_heading_font.fallback_families }};
+      font-weight: {{ bufy_heading_font.weight }};
+      font-style: {{ bufy_heading_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if bufy_text_custom %}
+  <style>
+    .bufy-{{ section.id }} .box__description * {
+      font-family: {{ bufy_text_font.family }}, {{ bufy_text_font.fallback_families }};
+      font-weight: {{ bufy_text_font.weight }};
+      font-style: {{ bufy_text_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% unless full_width %}
+  <style>
+    .section-{{ section.id }}-settings {
+      max-width: {{ content_width }}rem;
+    }
+  </style>
+{% endunless %}
+
+{% if bufy_shadow %}
+  <style>
+    .bufy-{{ section.id }} .wrapper-box {
+       box-shadow: 4px 4px 20px {{ bufy_shadow_color | hex_to_rgba: 0.2 }};
+    }
+  </style>
+{% endif %}
+
+{% capture svg_example_1 %}
+ <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100" height="100" rx="20" fill="#F1F5F9"/>
+  <rect x="30" y="25" width="40" height="25" rx="5" fill="#2563EB"/>
+  <rect x="30" y="60" width="40" height="25" rx="5" fill="#2563EB"/>
+  <rect x="30" y="50" width="15" height="10" rx="2" fill="#2563EB"/>
+  <path d="M70 35L60 55H68L63 70L78 50H70L75 35Z" fill="#F97316"/>
+</svg>
+{% endcapture %}
+{% capture svg_example_2 %}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon icon--medium">
+  <path fill-rule="evenodd" d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.75a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .913-.143Z" clip-rule="evenodd" />
+</svg>
+{% endcapture %}
+{% capture svg_example_3 %}
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon icon--medium">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+</svg>
+{% endcapture %}
+{% capture svg_example_4 %}
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon icon--medium">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+</svg>
+{% endcapture %}
+{% capture svg_example_5 %}
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon icon--medium">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+</svg>
+{% endcapture %}
+
+<div class="section-{{ section.id }} bufy-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
+    <div class="section-{{ section.id }}-settings ">
+      <div class="wrapper-box">
+          {%- for block in section.blocks -%}
+              <{% if block.settings.bufy_url != blank %}a href="{{ block.settings.bufy_url }}"{% else %}div{% endif %} class="box">
+                  {% unless block.settings.hide_image %}
+                  <div class="box__image">
+                      {%- if block.settings.bufy_image != blank -%}
+                        <img src="{{ block.settings.bufy_image | image_url }}" alt="bufy-item-{{ forloop.index }}" {% if lazy %}loading="lazy"{% endif %}>
+                      {%- else -%}
+                       {% case forloop.index %}
+                        {% when 1 %}
+                          {{ svg_example_1 }}
+                        {% when 2 %}
+                          {{ svg_example_2 }}
+                        {% when 3 %}
+                          {{ svg_example_3 }}
+                        {% when 4 %}
+                          {{ svg_example_4 }}
+                        {% when 5 %}
+                          {{ svg_example_5 }}
+                        {% else %}
+                          {{ svg_example_1 }}
+                        {% endcase %}
+                      {%- endif -%}
+                  </div>
+                  {% endunless %}
+                  <div class="box__content-wrapper">
+                      <div class="box__title">{{ block.settings.bufy_title }}</div>
+                      <div class="box__description">{{ block.settings.bufy_text }}</div>
+                  </div>
+              </{% if block.settings.bufy_url != blank %}a{% else %}div{% endif %}>
+          {%- endfor -%}
+      </div>
+  </div>
+</div>
+
+{% schema %}
+{
+    "name":"Biuldify Feature",
+    "tag":"section",
+    "class":"bufy-type1",
+    "settings": [
+      {
+        "type":"header",
+        "content":"bufy wrapper settings"
+      },
+      {
+        "type": "range",
+        "id": "bufy_row",
+        "min": 1,
+        "max": 5,
+        "step": 1,
+        "label": "bufy per row",
+        "default": 5
+      },
+      {
+        "type": "range",
+        "id": "bufy_row_mobile",
+        "min": 1,
+        "max": 4,
+        "step": 1,
+        "label": "bufy per row - mobile",
+        "default": 1
+      },
+      {
+        "type": "range",
+        "id": "bufy_gap",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Gap",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "bufy_gap_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Gap - mobile",
+        "default": 20
+      },
+      {
+         "type": "range",
+         "id": "bufy_padding_horizontal",
+         "min": 0,
+         "max": 100,
+         "step": 2,
+         "unit": "px",
+         "label": "Padding horizontal",
+         "default": 0
+      },
+      {
+        "type": "range",
+        "id": "bufy_padding_vertical",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Padding vertical",
+        "default": 0
+      },
+      {
+         "type": "range",
+         "id": "bufy_radius",
+         "min": 0,
+         "max": 100,
+         "step": 2,
+         "unit": "px",
+         "label": "Roundness",
+         "default": 16
+      },
+      {
+         "type": "range",
+         "id": "bufy_border_thickness",
+         "min": 0,
+         "max": 10,
+         "step": 1,
+         "unit": "px",
+         "label": "Border thickness",
+         "default": 0
+      },
+      {
+        "type": "checkbox",
+        "id": "bufy_shadow",
+        "label": "Use shadow",
+        "default": false
+      },
+      {
+        "type":"header",
+        "content":"bufy heading settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "bufy_heading_custom",
+        "label": "Use custom font",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "bufy_heading_font",
+        "label": "Font family",
+        "default": "josefin_sans_n4"
+      },
+      {
+        "type": "range",
+        "id": "bufy_heading_size",
+        "min": 0,
+        "max": 72,
+        "step": 2,
+        "unit": "px",
+        "label": "Font size",
+        "default": 14
+      },
+      {
+        "type": "range",
+        "id": "bufy_heading_size_mobile",
+        "min": 0,
+        "max": 72,
+        "step": 2,
+        "unit": "px",
+        "label": "Font size - mobile",
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "bufy_heading_height",
+        "min": 50,
+        "max": 200,
+        "step": 10,
+        "unit": "%",
+        "label": "Line height",
+        "default": 130
+      },
+      {
+        "type": "range",
+        "id": "bufy_heading_mt",
+        "min": 0,
+        "max": 50,
+        "step": 2,
+        "unit": "px",
+        "label": "Margin top",
+        "default": 8
+      },
+      {
+        "type":"header",
+        "content":"bufy text settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "bufy_text_custom",
+        "label": "Use custom font",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "bufy_text_font",
+        "label": "Font family",
+        "default": "josefin_sans_n4"
+      },
+      {
+        "type": "range",
+        "id": "bufy_text_size",
+        "min": 0,
+        "max": 72,
+        "step": 2,
+        "unit": "px",
+        "label": "Font size",
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "bufy_text_size_mobile",
+        "min": 0,
+        "max": 72,
+        "step": 2,
+        "unit": "px",
+        "label": "Font size - mobile",
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "bufy_text_height",
+        "min": 50,
+        "max": 200,
+        "step": 10,
+        "unit": "%",
+        "label": "Line height",
+        "default": 130
+      },
+      {
+        "type": "range",
+        "id": "bufy_text_mt",
+        "min": 0,
+        "max": 50,
+        "step": 2,
+        "unit": "px",
+        "label": "Margin top",
+        "default": 4
+      },
+      {
+        "type":"header",
+        "content":"bufy icon settings"
+      },
+      {
+        "type": "range",
+        "id": "bufy_icon_size",
+        "min": 10,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Size",
+        "default": 42
+      },
+      {
+        "type": "range",
+        "id": "bufy_icon_size_mobile",
+        "min": 10,
+        "max": 200,
+        "step": 2,
+        "unit": "px",
+        "label": "Size - mobile",
+        "default": 42
+      },
+      {
+        "type":"header",
+        "content":"bufy wrapper colors"
+      },
+      {
+        "type":"color",
+        "id":"bufy_bg",
+        "label":"Background color",
+        "default":"#FFFFFF"
+      },
+      {
+        "type":"color",
+        "id":"bufy_border_color",
+        "label":"Border color",
+        "default":"#000000"
+      },
+      {
+        "type":"color",
+        "id":"bufy_shadow_color",
+        "label":"Shadow color",
+        "default":"#000000"
+      },
+      {
+        "type":"header",
+        "content":"bufy content colors"
+      },
+      {
+        "type":"color",
+        "id":"bufy_heading_color",
+        "label":"Heading color",
+        "default":"#000000"
+      },
+      {
+        "type":"color",
+        "id":"bufy_text_color",
+        "label":"Text color",
+        "default":"#000000"
+      },
+      {
+        "type":"color",
+        "id":"bufy_icon_color",
+        "label":"Icon color",
+        "default":"#000000"
+      },
+      {
+        "type":"header",
+        "content":"Section colors"
+      },
+      {
+        "type": "color",
+        "label": "Background color",
+        "id": "background_color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color_background",
+        "id": "background_gradient",
+        "label": "Background gradient"
+      },
+      {
+        "type": "color",
+        "label": "Border",
+        "id": "border_color",
+        "default": "#000000"
+      },
+      {
+        "type": "header",
+        "content": "Section margin (outside)"
+      },
+      {
+        "type": "range",
+        "id": "margin_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "Margin top",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "Margin bottom",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "Section padding (inside)"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "Padding top",
+        "default": 16
+      },
+      {
+         "type": "range",
+         "id": "padding_bottom",
+         "min": 0,
+         "max": 100,
+         "step": 4,
+         "unit": "px",
+         "label": "Padding bottom",
+         "default": 16
+      },
+      {
+        "type": "range",
+        "id": "padding_horizontal",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "unit": "rem",
+        "label": "Padding sides",
+        "default": 5
+      },
+      {
+        "type": "range",
+        "id": "padding_horizontal_mobile",
+        "min": 0,
+        "max": 15,
+        "step": 0.5,
+        "unit": "rem",
+        "label": "Padding sides mobile",
+        "default": 1.5
+      },
+      {
+        "type": "header",
+        "content": "Section settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "full_width",
+        "label": "Full width",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "content_width",
+        "min": 0,
+        "max": 400,
+        "step": 10,
+        "unit": "rem",
+        "label": "Section content width",
+        "default": 120
+      },
+      {
+        "type": "range",
+        "id": "border_thickness",
+        "min": 0,
+        "max": 50,
+        "step": 1,
+        "unit": "px",
+        "label": "Border thickness",
+        "default": 0
+      },
+      {
+        "type": "checkbox",
+        "id": "lazy",
+        "label": "Lazy load",
+        "info": "Lazy load images for speed optimisation",
+        "default": true
+      }
+    ],
+    "blocks":[
+       {
+          "type":"image",
+          "name":"bufy feature item",
+          "settings":[
+             {
+                "type":"text",
+                "id":"bufy_title",
+                "label":"Item title text",
+                "default":"Item title"
+             },
+             {
+                "type":"richtext",
+                "id":"bufy_text",
+                "label":"Item text (richtext)",
+                "default":"<p>Item text</p>"
+             },
+             {
+                "type":"image_picker",
+                "id":"bufy_image",
+                "label":"Icon"
+             },
+             {
+                "type":"url",
+                "id":"bufy_url",
+                "label":"Item URL"
+             },
+             {
+                "type":"checkbox",
+                "id":"hide_image",
+                "default": false,
+                "label":"Hide Image"
+             }
+          ]
+       }
+    ],
+    "presets":[
+       {
+          "name":"Biuldify - Feature",
+          "blocks":[
+             {
+                "type":"image",
+                "settings":{
+                   "bufy_title":"Free Shipping",
+                   "bufy_text":"<p>Order today and get it delivered tomorrow.</p>",
+                   "bufy_url":"https://vir-za.com/contact-us/"
+                }
+             },
+             {
+                "type":"image",
+                "settings":{
+                   "bufy_title": "Price-Match Guarantee",
+                   "bufy_text": "<p>Shop confidently—we’ll match lower prices</p>"
+                }
+             },
+             {
+                "type":"image",
+                "settings":{
+                   "bufy_title": "Easy Exchange",
+                   "bufy_text": "<p>Hassle-free returns with an included slip.</p>"
+				        }
+             },
+             {
+                "type": "image",
+                "settings": {
+                    "bufy_title": "Trusted by Customers",
+                    "bufy_text": "<p>Your satisfaction is our top priority</p>"
+                }
+             },
+             {
+                "type": "image",
+                "settings": {
+                    "bufy_title": "Top-Rated Service",
+                    "bufy_text": "<p>Consistently rated #1 in customer care.</p>"
+                }
+             }
+          ]
+       }
+    ]
+ }
+{% endschema %}
+        
+        `;
+
+        const response = await admin.graphql(
+            `#graphql
+            mutation themeFilesUpsert($files: [OnlineStoreThemeFilesUpsertFileInput!]!, $themeId: ID!) {
+                themeFilesUpsert(files: $files, themeId: $themeId) {
+                    upsertedThemeFiles { filename }
+                    userErrors { field message }
+                }
+            }`,
+            {
+                variables: {
+                    themeId: mainTheme.node.id, // Use the full GraphQL ID
+                    files: [{
+                        filename: "sections/bufy-feature.liquid",
+                        body: {
+                            type: "TEXT",
+                            value: sectionContent
+                        }
+                    }]
+                }
+            }
+        );
+
+        const data = await response.json();
+        
+        console.log("Mutation response:", JSON.stringify(data, null, 2));
+        
+        // Handle GraphQL errors
+        if (data.errors) {
+            return json({ errors: data.errors }, { status: 400 });
+        }
+        
+        // Handle user errors from mutation
+        if (data.data.themeFilesUpsert.userErrors.length > 0) {
+            return json({ 
+                errors: data.data.themeFilesUpsert.userErrors 
+            }, { status: 400 });
+        }
+        
+        return json({ 
+            success: true, 
+            data: data.data.themeFilesUpsert.upsertedThemeFiles 
+        });
+        
+    } catch (error) {
+        console.error("Server error:", error);
+        return json({ 
+            errors: [{ 
+                message: "Internal server error",
+                extensions: { 
+                    code: "INTERNAL_ERROR",
+                    details: error.message 
+                }
+            }] 
+        }, { status: 500 });
+    }
+};
+
+export const loader = () => new Response(null, { status: 405 });

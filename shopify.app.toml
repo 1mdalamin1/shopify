@@ -2,13 +2,9 @@
 
 client_id = "6dbc73292698cd24abf2e5ec8d4daf24"
 name = "buildify"
-application_url = "https://mailed-cardiff-builders-counts.trycloudflare.com"
+application_url = "https://eco-yemen-concord-ghz.trycloudflare.com"
 embedded = true
 handle = "buildify-3"
-
-[build]
-include_config_on_deploy = true
-automatically_update_urls_on_dev = true
 
 [webhooks]
 api_version = "2025-07"
@@ -23,10 +19,17 @@ api_version = "2025-07"
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "read_customers, write_products"
+scopes = "read_customers,read_themes,write_products,write_themes"
 
 [auth]
-redirect_urls = ["https://mailed-cardiff-builders-counts.trycloudflare.com/auth/callback", "https://mailed-cardiff-builders-counts.trycloudflare.com/auth/shopify/callback", "https://mailed-cardiff-builders-counts.trycloudflare.com/api/auth/callback"]
+redirect_urls = [
+  "https://eco-yemen-concord-ghz.trycloudflare.com/auth/callback",
+  "https://eco-yemen-concord-ghz.trycloudflare.com/auth/shopify/callback",
+  "https://eco-yemen-concord-ghz.trycloudflare.com/api/auth/callback"
+]
 
 [pos]
 embedded = false
+
+[build]
+automatically_update_urls_on_dev = true

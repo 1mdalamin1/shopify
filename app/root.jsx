@@ -5,10 +5,10 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import tailwind from "./tailwind.css";
+// import tailwind from "./tailwind.css";
 
 export const links = () => [
-  { rel: "stylesheet", href: tailwind },
+  { rel: "stylesheet", href: "/app/tailwind.css" },
 ];
 export default function App() {
   return (

@@ -1,0 +1,101 @@
+
+
+<div class="show-wishlist-btn-wrap">
+  <button class="show-wishlist-btn cursor-pointer relative">
+    {% render 'heart-icon' %}
+    {%- if block.settings.show_item_count -%}
+    <span class="absolute wishtlist-count">0</span>
+    {%- endif -%}
+  </button>
+  <div class="absolute wishlist-drawer z-10 hidden min-w-md right-0 top-auto  bg-white p-6 shadow-xl mt-4">
+    <button class="absolute right-2 top-2 cursor-pointer p-4 wishlist-drawer-close ">
+      {% render 'close-icon' %}
+    </button>
+    <div id="wishlist-drawer-items" data-price-symbol="{{ block.settings.symbol }}"></div>
+
+    <div class="text-center mt-4">
+      {%- if block.settings.url != blank -%}
+      <a href="{{ block.settings.url }}" class="bufy-btn-black">{{ block.settings.text }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="{{ 'main.js' | asset_url }}" defer></script>
+
+{{ 'tailwind.css' | asset_url | stylesheet_tag }}
+<style>
+  .show-wishlist-btn svg {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+  }
+  {%- if block.settings.custom_css != blank -%}
+    {{ block.settings.custom_css }}
+  {%- endif -%}
+</style>
+
+{% schema %}
+{
+  "name": "Wish List",
+  "target": "section",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    
+    {
+      "id": "icon_size",
+      "type": "range",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Icon Size",
+      "default": 24
+    },
+    {
+      "id": "show_item_count",
+      "type": "checkbox",
+      "label": "Show totall wishlist item count",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "Show All"
+    },
+    {
+      "type": "select",
+      "id": "symbol",
+      "label": "Currency Symbol",
+      "options": [
+        { "value": "৳", "label": "Tk (৳) BDT" },
+        { "value": "$", "label": "Dollar ($)" },
+        { "value": "€", "label": "Euro (€)" },
+        { "value": "£", "label": "Pound (£)" },
+        { "value": "₹", "label": "Rupee (₹)" },
+        { "value": "₩", "label": "Won (₩)" },
+        { "value": "¥", "label": "Yen (¥)" }
+      ],
+      "default": "৳"
+    },
+    {
+      "type": "header",
+      "content": "Advanced"
+    },
+    {
+      "id": "custom_css",
+      "type": "textarea",
+      "label": "Custom CSS",
+      "info": "Add additional CSS rules here"
+    }
+  ]
+}
+{% endschema %}

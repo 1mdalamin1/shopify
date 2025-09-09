@@ -8,7 +8,8 @@ import {
   Grid,
   Divider,
   BlockStack,
-  ExceptionList
+  ExceptionList,
+  
 } from "@shopify/polaris";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
@@ -49,33 +50,34 @@ export async function loader({ request }) {
 
 let planData = [
   {
-    title: "Free",
+    title: "✨ Free",
     description: "Free plan with basic features",
     price: "0",
     action: "Upgrade to pro",
     name: "Free",
     url: "/app/upgrade",
     features: [
-      "100 wishlist per day",
-      "500 Products",
-      "Basic customization",
-      "Basic support",
-      "Basic analytics"
+      "Unlimited wishlist per day",
+      "✅ Add and display product FAQs",
+      "Basic design elements (limited)",
+      "Basic customization options",
+      "💬 Standard support"
     ]
   },
   {
-    title: "Pro",
+    title: "⚡ Pro",
     description: "Pro plan with advanced features",
     price: "10",
     name: "Monthly subscription",
     action: "Upgrade to pro",
     url: "/app/upgrade",
     features: [
-      "Unlimted wishlist per day",
-      "10000 Products",
-      "Advanced customization",
-      "Priority support",
-      "Advanced analytics"
+      "🚀 Includes all Free features, Plus...",
+      "🛒 Wishlist to Cart & Checkout integration",
+      "🗑️ One-click “Clear All Wishlist” option",
+      "🎨 Advanced, unlimited design elements",
+      "⚙️ Full customization options",
+      "⭐ Priority support"
     ]
   },
 ]
@@ -151,9 +153,13 @@ export default function PricingPage() {
 
                 { plan_item.name == "Monthly subscription" ?
                   plan.name != "Monthly subscription" ? (
-                    <Button primary url={plan_item.url}>
+                    
+                    <>
+                    {/* <Button primary url={plan_item.url}>
                       {plan_item.action}
-                    </Button>
+                    </Button> */}
+                    </>
+
                   ) : (
                     <Text as="p" variant="bodyMd">
                       You're currently on this plan
