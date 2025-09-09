@@ -154,13 +154,13 @@
         "feature_text_mt": 4,
         "feature_icon_size": 42,
         "feature_icon_size_mobile": 42,
-        "feature_bg": "#FFFFFF",
+        "feature_bg": "#ffffff",
         "feature_border_color": "#000000",
         "feature_shadow_color": "#000000",
         "feature_heading_color": "#000000",
         "feature_text_color": "#000000",
         "feature_icon_color": "#000000",
-        "background_color": "#FFFFFF",
+        "background_color": "#ffffff",
         "background_gradient": "",
         "border_color": "#000000",
         "margin_top": 0,
@@ -219,6 +219,309 @@
     "testimonials": {
       "type": "testimonials",
       "settings": {}
+    },
+    "ss_parallax_banner_imk4zU": {
+      "type": "ss-parallax-banner",
+      "blocks": {
+        "heading_B6APNz": {
+          "type": "heading",
+          "settings": {
+            "heading": "<h2>Parallax Banner</h2>",
+            "heading_custom": false,
+            "heading_font": "josefin_sans_n4",
+            "heading_size": 40,
+            "heading_size_mobile": 30,
+            "heading_height": 130,
+            "heading_mt": 0,
+            "heading_color": "#FFFFFF"
+          }
+        },
+        "text_dXBBTz": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Add your own custom content.</p>",
+            "text_custom": false,
+            "text_font": "josefin_sans_n4",
+            "text_size": 18,
+            "text_size_mobile": 16,
+            "text_height": 150,
+            "text_mt": 16,
+            "text_color": "#FFFFFF"
+          }
+        },
+        "button_PgLrbe": {
+          "type": "button",
+          "settings": {
+            "button": "SHOP NOW",
+            "button_url": "",
+            "button_custom": false,
+            "button_font": "josefin_sans_n4",
+            "button_size": 14,
+            "button_size_mobile": 14,
+            "button_height": 100,
+            "button_padding_vertical": 16,
+            "button_padding_vertical_mobile": 16,
+            "button_padding_horizontal": 50,
+            "button_padding_horizontal_mobile": 50,
+            "button_radius": 100,
+            "button_border_thickness": 1,
+            "button_mt": 16,
+            "button_gap": 28,
+            "button_ellipse": false,
+            "button_shadow": false,
+            "button_style": "outline",
+            "button_color": "#FFFFFF",
+            "button_hover_color": "#FFFFFF",
+            "button_bg_color": "#000000",
+            "button_bg_hover_color": "#000000",
+            "button_border_color": "#000000",
+            "button_border_hover_color": "#000000",
+            "button_shadow_color": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "heading_B6APNz",
+        "text_dXBBTz",
+        "button_PgLrbe"
+      ],
+      "name": "SS - Parallax Banner",
+      "settings": {
+        "parallax": true,
+        "parallax_mobile": false,
+        "banner_height": "adapt_first",
+        "banner_fixed_height": 270,
+        "banner_fixed_height_mobile": 500,
+        "image": "shopify://shop_images/sorry-my-mistak.jpg",
+        "overlay": 0.2,
+        "content_maxwidth": 65,
+        "content_maxwidth_mobile": 100,
+        "content_horizontal_position": "center",
+        "content_horizontal_position_mobile": "center",
+        "content_vertical_position": "center",
+        "content_vertical_position_mobile": "center",
+        "content_padding_vertical": 32,
+        "content_padding_vertical_mobile": 20,
+        "content_padding_horizontal": 20,
+        "content_padding_horizontal_mobile": 20,
+        "overlay_color": "#000000",
+        "background_color": "#FFFFFF",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": true,
+        "content_width": 120,
+        "border_thickness": 0,
+        "lazy": true
+      }
+    },
+    "ss_gallery_9_VJVtEE": {
+      "type": "ss-gallery-9",
+      "blocks": {
+        "heading_YAEcpb": {
+          "type": "heading",
+          "settings": {
+            "heading": "<h2>Gallery #9</h2>",
+            "heading_custom": false,
+            "heading_font": "josefin_sans_n4",
+            "heading_size": 48,
+            "heading_size_mobile": 32,
+            "heading_height": 130,
+            "heading_color": "#121212"
+          }
+        },
+        "text_4tKjyP": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Tell your story</p>",
+            "text_custom": false,
+            "text_font": "josefin_sans_n4",
+            "text_size": 14,
+            "text_size_mobile": 14,
+            "text_height": 150,
+            "text_mt": 14,
+            "text_mt_mobile": 14,
+            "text_color": "#303030"
+          }
+        },
+        "slide_BbzcVW": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/2PicsArt_05-09-2016_9b7be464-22cd-45e2-8d4f-2daddb8923dd.jpg",
+            "text": "Tanvir",
+            "title": "564.505",
+            "url": ""
+          }
+        },
+        "slide_Xwi9jm": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Tanvir.jpg",
+            "text": "Caption",
+            "title": "Title",
+            "url": ""
+          }
+        },
+        "slide_68KTrQ": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/tanvir-md-al-amin.jpg",
+            "text": "Caption",
+            "title": "Title",
+            "url": ""
+          }
+        },
+        "slide_AGHdw3": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/gole-action-plan.jpg",
+            "text": "Caption",
+            "title": "Title",
+            "url": ""
+          }
+        },
+        "slide_MUxpTd": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/gift-card.jpg",
+            "text": "Caption",
+            "title": "Title",
+            "url": ""
+          }
+        },
+        "slide_R6GqX6": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/sorry-my-mistak.jpg",
+            "text": "Caption",
+            "title": "Title",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_YAEcpb",
+        "text_4tKjyP",
+        "slide_BbzcVW",
+        "slide_Xwi9jm",
+        "slide_68KTrQ",
+        "slide_AGHdw3",
+        "slide_MUxpTd",
+        "slide_R6GqX6"
+      ],
+      "name": "SS - Gallery #9",
+      "settings": {
+        "content_align": "center",
+        "content_align_mobile": "center",
+        "slider_view": 4,
+        "slider_view_mobile": 1.2,
+        "slider_gap": 12,
+        "slider_gap_mobile": 12,
+        "slider_mt": 30,
+        "slider_mt_mobile": 16,
+        "slide_padding_advanced": false,
+        "slide_padding_horizontal": 120,
+        "slide_padding_horizontal_mobile": 10,
+        "slide_padding_vertical": 20,
+        "slide_padding_vertical_mobile": 10,
+        "slide_radius": 6,
+        "slide_border_thickness": 0,
+        "slide_overlay": 0.2,
+        "slide_ratio": "portrait",
+        "slide_ratio_mobile": "portrait",
+        "slide_align": "center",
+        "slide_align_mobile": "center",
+        "text_shadow": true,
+        "text_custom": false,
+        "text_font": "josefin_sans_n4",
+        "text_size": 14,
+        "text_size_mobile": 14,
+        "text_height": 130,
+        "title_custom": false,
+        "title_font": "josefin_sans_n4",
+        "title_size": 25,
+        "title_size_mobile": 20,
+        "title_height": 130,
+        "arrow_show_desktop": true,
+        "arrow_show_mobile": false,
+        "arrow_size": 48,
+        "arrow_size_mobile": 48,
+        "arrow_icon_size": 10,
+        "arrow_icon_size_mobile": 10,
+        "arrow_border_thickness": 0,
+        "arrow_radius": 100,
+        "arrow_hover_effect": "color",
+        "text_color": "#FFFFFF",
+        "title_color": "#FFFFFF",
+        "slide_border_color": "#121212",
+        "slide_overlay_color": "#000000",
+        "arrow_color": "#FFFFFF",
+        "arrow_hover_color": "#121212",
+        "arrow_bg_color": "#121212",
+        "arrow_bg_hover_color": "#F3F3F3",
+        "arrow_border_color": "#121212",
+        "arrow_border_hover_color": "#121212",
+        "background_style": "solid",
+        "background_color": "#FFFFFF",
+        "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
+        "border_color": "#121212",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": true,
+        "content_width": 1200,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": true
+      }
+    },
+    "ss_featured_review_slider_NptcJQ": {
+      "type": "ss-featured-review-slider",
+      "blocks": {
+        "quote_Ga3qaf": {
+          "type": "quote",
+          "settings": {
+            "quote": "<p>\"</p><p>This rug is such good quality and makes me so happy every time I look at it.  I'm using this one for a top cover over my bedspread. It's a perfect  match for my room and linen. I have another that I use as a throw  for the lounge and a picnic rug! In LOVE.</p><p>- Barbara W.</p>"
+          }
+        },
+        "quote_kLMPDC": {
+          "type": "quote",
+          "settings": {
+            "quote": "<p>\"</p><p>The postage was incredibly quick and the quality and colours far exceeded what I thought. The pics don't do them justice. Truly unique rugs that I doubt will date anytime soon. I would recommend - beautiful rug and great customer service. </p><p>- Tanya E.</p>"
+          }
+        },
+        "quote_tAkiHn": {
+          "type": "quote",
+          "settings": {
+            "quote": "<p>\"</p><p>My husband argued with me saying we didn’t need a new blanket. Once we received this one, he quickly changed his tune. It’s cozy, soft and warm. I love the design and boho vibe it adds to our home. High quality product at an affordable price.</p><p>- Bebe H.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "quote_Ga3qaf",
+        "quote_kLMPDC",
+        "quote_tAkiHn"
+      ],
+      "name": "SS - Review slider",
+      "settings": {
+        "example": "<div data-review-quote-slider-target></div>",
+        "pagination_color": "#db877b",
+        "bg_color": "#f4d9d5",
+        "text_color": "#d87e71",
+        "border_radius": 32,
+        "font_size": 16,
+        "custom_classes": ""
+      }
     }
   },
   "order": [
@@ -230,6 +533,9 @@
     "product_grid_yakeFG",
     "categary_box",
     "175626716105914cf9",
-    "testimonials"
+    "testimonials",
+    "ss_parallax_banner_imk4zU",
+    "ss_gallery_9_VJVtEE",
+    "ss_featured_review_slider_NptcJQ"
   ]
 }
