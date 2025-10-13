@@ -26,7 +26,7 @@
     {% sections 'header-group' %}
     {% comment %} {% include 'header.liquid' %} <!-- This is the header snippet --> {% endcomment %}
 
-    {{ content_for_layout }}
+    {% capture BUILDIFY_CONTENT_FOR_LAYOUT %}{{ content_for_layout }}{% endcapture %}{% render 'buildify-variables', BUILDIFY_CONTENT_FOR_LAYOUT: BUILDIFY_CONTENT_FOR_LAYOUT %}
     
     {% sections 'footer-group' %}
     {% comment %} {% include 'footer.liquid' %} {% endcomment %}
